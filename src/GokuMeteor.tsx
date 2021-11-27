@@ -1,10 +1,23 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
+import { SetStateAction, useState } from 'react'
 
 const GokuMeteor = () => {
+  const [pointerTop, setPointerTop] = useState(0)
+  const [pointerLeft, setPointerLeft] = useState(0)
+
+  const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
+    setPointerTop(e.pageY)
+    setPointerLeft(e.pageX)
+  }
+
   return (
-    <MeteorBackground>
-      <MeteorTarget/>
+    <MeteorBackground
+      onPointerMove={pointerMoveHandler}
+    >
+      <MeteorTarget
+        sx={{ top: pointerTop, left: pointerLeft }}
+      />
     </MeteorBackground>
   )
 }
