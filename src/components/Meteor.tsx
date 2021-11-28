@@ -14,18 +14,22 @@ const Meteor = (props: MeteorProps) => {
   return (
     <Wrapper
       sx={{
-        top: props.position.top - meteorSize / 2,
-        left: props.position.left - meteorSize / 2,
         width: meteorSize,
         height: meteorSize,
         borderRadius: meteorSize,
+        animation: 'strike 1s',
+        '@keyframes strike': {
+          from: {},
+          to: {
+            transform: `translate(${props.position.left - meteorSize / 2}px, ${props.position.top - meteorSize / 2}px)`,
+          },
+        },
       }}
     />
   )
 }
 
 const Wrapper = styled('div')({
-  transition: 'all 0.3s linear',
   position: 'absolute',
   zIndex: 50,
   backgroundColor: '#fff',
