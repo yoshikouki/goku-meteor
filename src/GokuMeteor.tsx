@@ -5,10 +5,15 @@ import { SetStateAction, useState } from 'react'
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
   const [pointerLeft, setPointerLeft] = useState(0)
+  const [meteors, setMeteors] = useState<JSX.Element[]>([])
+  const [meteorCount, setMeteorCount] = useState(0)
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setPointerTop(e.pageY)
     setPointerLeft(e.pageX)
+    setMeteorCount(meteorCount + 1)
+    meteors.push(<span>/</span>)
+    setMeteors(meteors)
   }
 
   return (
@@ -28,6 +33,12 @@ const GokuMeteor = () => {
           transition: 'all 0.3s linear',
         }}
       />
+      <Box>
+        <span style={{ color: 'white' }}>{meteorCount}</span>
+        <Box>
+          <span style={{ color: 'gray' }}>{meteors}</span>
+        </Box>
+      </Box>
     </MeteorBackground>
   )
 }
