@@ -12,7 +12,7 @@ const Meteor = (props: MeteorProps) => {
   const meteorSize = props.width || 4
 
   return (
-    <WrapperMeteor
+    <Wrapper
       sx={{
         top: props.position.top - meteorSize / 2,
         left: props.position.left - meteorSize / 2,
@@ -24,7 +24,7 @@ const Meteor = (props: MeteorProps) => {
   )
 }
 
-const WrapperMeteor = styled('div')({
+const Wrapper = styled('div')({
   transition: 'all 0.3s linear',
   position: 'absolute',
   zIndex: 50,

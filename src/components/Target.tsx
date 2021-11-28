@@ -12,7 +12,7 @@ const Target = (props: MeteorProps) => {
   const pointerSize = props.width || 10
 
   return (
-    <WrapperMeteor
+    <Wrapper
       sx={{
         top: props.position.top - pointerSize / 2,
         left: props.position.left - pointerSize / 2,
@@ -24,7 +24,7 @@ const Target = (props: MeteorProps) => {
   )
 }
 
-const WrapperMeteor = styled('div')({
+const Wrapper = styled('div')({
   pointerEvents: 'none',
   position: 'absolute',
   zIndex: 100,
