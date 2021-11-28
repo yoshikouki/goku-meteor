@@ -31,16 +31,9 @@ const GokuMeteor = () => {
       onPointerMove={pointerMoveHandler}
       onClick={strikeHandler}
     >
-      <Target
-        position={{
-          top: pointerTop,
-          left: pointerLeft,
-        }}
-      />
-      <Box>
-        <span style={{ color: 'white' }}>{meteorCount}</span>
-        <Box>{meteors}</Box>
-      </Box>
+      <Target position={{ top: pointerTop, left: pointerLeft }}/>
+      <Box>{meteors}</Box>
+      <Box><span style={{ color: 'white' }}>{meteorCount}</span></Box>
     </MeteorBackground>
   )
 }
