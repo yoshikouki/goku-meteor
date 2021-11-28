@@ -1,16 +1,13 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 import { SetStateAction, useState } from 'react'
+import Meteor from './components/Meteor'
 
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
   const [pointerLeft, setPointerLeft] = useState(0)
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
-  const [meteorStyle, setMeteorStyle] = useState({
-    top: pointerTop - meteorSize / 2,
-    left: pointerLeft - meteorSize / 2,
-  })
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setPointerTop(e.pageY)
@@ -18,12 +15,12 @@ const GokuMeteor = () => {
     setMeteorCount(meteorCount + 1)
     setMeteors([
       ...meteors,
-      <Meteor key={meteors.length + 1} sx={meteorStyle}/>,
+
+      <Meteor
+        key={meteors.length + 1}
+        position={{ top: pointerTop, left: pointerLeft }}
+      />,
     ])
-    setMeteorStyle({
-      top: pointerTop - meteorSize / 2,
-      left: pointerLeft - meteorSize / 2,
-    })
   }
 
   return (
@@ -36,13 +33,7 @@ const GokuMeteor = () => {
           left: pointerLeft - targetPointerSize / 2,
         }}
       />
-      <Meteor
-        sx={{
-          top: pointerTop - meteorSize / 2,
-          left: pointerLeft - meteorSize / 2,
-          transition: 'all 0.3s linear',
-        }}
-      />
+      <Meteor position={{ top: pointerTop, left: pointerLeft }}/>
       <Box>
         <span style={{ color: 'white' }}>{meteorCount}</span>
         <Box>{meteors}</Box>
@@ -68,17 +59,6 @@ const MeteorTarget = styled('div')({
   width: targetPointerSize,
   height: targetPointerSize,
   borderRadius: targetPointerSize,
-  backgroundColor: '#fff',
-})
-
-const meteorSize = 4
-const Meteor = styled('div')({
-  transition: 'all 0.3s linear',
-  position: 'absolute',
-  zIndex: 50,
-  width: meteorSize,
-  height: meteorSize,
-  borderRadius: meteorSize,
   backgroundColor: '#fff',
 })
 
