@@ -18,6 +18,13 @@ const GokuMeteor = () => {
       <MeteorTarget
         sx={{ top: pointerTop, left: pointerLeft }}
       />
+      <Meteor
+        sx={{
+          top: pointerTop,
+          left: pointerLeft,
+          transition: 'all 0.3s linear',
+        }}
+      />
     </MeteorBackground>
   )
 }
@@ -39,6 +46,15 @@ const MeteorTarget = styled('div')({
   height: 10,
   backgroundColor: '#fff',
   borderRadius: 5,
+})
+
+const Meteor = styled('div')({
+  position: 'absolute',
+  zIndex: 50,
+  width: 4,
+  height: 4,
+  borderRadius: 4,
+  backgroundColor: '#fff',
 })
 
 export default GokuMeteor
