@@ -12,7 +12,14 @@ const GokuMeteor = () => {
     setPointerTop(e.pageY)
     setPointerLeft(e.pageX)
     setMeteorCount(meteorCount + 1)
-    meteors.push(<span>/</span>)
+    meteors.push(
+      <Meteor
+        sx={{
+          top: pointerTop - meteorSize / 2,
+          left: pointerLeft - meteorSize / 2,
+        }}
+      />,
+    )
     setMeteors(meteors)
   }
 
