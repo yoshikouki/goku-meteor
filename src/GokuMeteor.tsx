@@ -7,20 +7,23 @@ const GokuMeteor = () => {
   const [pointerLeft, setPointerLeft] = useState(0)
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
+  const [meteorStyle, setMeteorStyle] = useState({
+    top: pointerTop - meteorSize / 2,
+    left: pointerLeft - meteorSize / 2,
+  })
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setPointerTop(e.pageY)
     setPointerLeft(e.pageX)
     setMeteorCount(meteorCount + 1)
-    meteors.push(
-      <Meteor
-        sx={{
-          top: pointerTop - meteorSize / 2,
-          left: pointerLeft - meteorSize / 2,
-        }}
-      />,
-    )
-    setMeteors(meteors)
+    setMeteors([
+      ...meteors,
+      <Meteor key={meteors.length + 1} sx={meteorStyle}/>,
+    ])
+    setMeteorStyle({
+      top: pointerTop - meteorSize / 2,
+      left: pointerLeft - meteorSize / 2,
+    })
   }
 
   return (
@@ -42,9 +45,7 @@ const GokuMeteor = () => {
       />
       <Box>
         <span style={{ color: 'white' }}>{meteorCount}</span>
-        <Box>
-          <span style={{ color: 'gray' }}>{meteors}</span>
-        </Box>
+        <Box>{meteors}</Box>
       </Box>
     </MeteorBackground>
   )
@@ -72,6 +73,7 @@ const MeteorTarget = styled('div')({
 
 const meteorSize = 4
 const Meteor = styled('div')({
+  transition: 'all 0.3s linear',
   position: 'absolute',
   zIndex: 50,
   width: meteorSize,
