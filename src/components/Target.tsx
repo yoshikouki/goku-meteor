@@ -9,26 +9,24 @@ interface MeteorProps {
 }
 
 const Target = (props: MeteorProps) => {
-  const pointerSize = props.width || 10
+  const meteorSize: number = props.width || 10
+  const targetX: number = props.position.left - meteorSize / 2
+  const targetY: number = props.position.top - meteorSize / 2
+
+  const Wrapper = styled('div')({
+    position: 'absolute',
+    top: targetY,
+    left: targetX,
+    zIndex: 100,
+    width: meteorSize,
+    height: meteorSize,
+    borderRadius: meteorSize,
+    backgroundColor: '#fff',
+  })
 
   return (
-    <Wrapper
-      sx={{
-        top: props.position.top - pointerSize / 2,
-        left: props.position.left - pointerSize / 2,
-        width: pointerSize,
-        height: pointerSize,
-        borderRadius: pointerSize,
-      }}
-    />
+    <Wrapper/>
   )
 }
-
-const Wrapper = styled('div')({
-  pointerEvents: 'none',
-  position: 'absolute',
-  zIndex: 100,
-  backgroundColor: '#fff',
-})
 
 export default Target
