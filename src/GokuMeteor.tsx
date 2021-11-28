@@ -2,6 +2,7 @@ import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 import { SetStateAction, useState } from 'react'
 import Meteor from './components/Meteor'
+import Target from './components/Target'
 
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
@@ -27,10 +28,10 @@ const GokuMeteor = () => {
     <MeteorBackground
       onPointerMove={pointerMoveHandler}
     >
-      <MeteorTarget
-        sx={{
-          top: pointerTop - targetPointerSize / 2,
-          left: pointerLeft - targetPointerSize / 2,
+      <Target
+        position={{
+          top: pointerTop,
+          left: pointerLeft,
         }}
       />
       <Meteor position={{ top: pointerTop, left: pointerLeft }}/>
@@ -47,19 +48,6 @@ const MeteorBackground = styled(Box)({
   height: '100vh',
   backgroundColor: 'darkblue',
   cursor: 'none',
-})
-
-const targetPointerSize = 10
-const MeteorTarget = styled('div')({
-  pointerEvents: 'none',
-  position: 'absolute',
-  top: 0,
-  left: 0,
-  zIndex: 100,
-  width: targetPointerSize,
-  height: targetPointerSize,
-  borderRadius: targetPointerSize,
-  backgroundColor: '#fff',
 })
 
 export default GokuMeteor
