@@ -16,12 +16,15 @@ const GokuMeteor = () => {
       onPointerMove={pointerMoveHandler}
     >
       <MeteorTarget
-        sx={{ top: pointerTop, left: pointerLeft }}
+        sx={{
+          top: pointerTop - targetPointerSize / 2,
+          left: pointerLeft - targetPointerSize / 2,
+        }}
       />
       <Meteor
         sx={{
-          top: pointerTop,
-          left: pointerLeft,
+          top: pointerTop - meteorSize / 2,
+          left: pointerLeft - meteorSize / 2,
           transition: 'all 0.3s linear',
         }}
       />
@@ -36,24 +39,26 @@ const MeteorBackground = styled(Box)({
   cursor: 'none',
 })
 
+const targetPointerSize = 10
 const MeteorTarget = styled('div')({
   pointerEvents: 'none',
   position: 'absolute',
   top: 0,
   left: 0,
   zIndex: 100,
-  width: 10,
-  height: 10,
+  width: targetPointerSize,
+  height: targetPointerSize,
+  borderRadius: targetPointerSize,
   backgroundColor: '#fff',
-  borderRadius: 5,
 })
 
+const meteorSize = 4
 const Meteor = styled('div')({
   position: 'absolute',
   zIndex: 50,
-  width: 4,
-  height: 4,
-  borderRadius: 4,
+  width: meteorSize,
+  height: meteorSize,
+  borderRadius: meteorSize,
   backgroundColor: '#fff',
 })
 
