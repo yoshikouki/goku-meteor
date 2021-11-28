@@ -8,31 +8,37 @@ interface MeteorProps {
   width?: number
 }
 
-const Meteor = (props: MeteorProps) => {
-  const meteorSize = props.width || 4
+const styleGenerator = (props: MeteorProps) => {
+  const meteorSize: number = props.width || 4
+  const targetX: number = props.position.left - meteorSize / 2
+  const targetY: number = props.position.top - meteorSize / 2
 
+  return {
+    position: 'absolute',
+    zIndex: 50,
+    width: meteorSize,
+    height: meteorSize,
+    borderRadius: meteorSize,
+    backgroundColor: '#fff',
+    animation: 'strike 1s',
+    '@keyframes strike': {
+      from: {},
+      to: {
+        transform: `translate(${targetX}px, ${targetY}px)`,
+      },
+    },
+  }
+}
+
+const Meteor = (props: MeteorProps) => {
   return (
     <Wrapper
-      sx={{
-        width: meteorSize,
-        height: meteorSize,
-        borderRadius: meteorSize,
-        animation: 'strike 1s',
-        '@keyframes strike': {
-          from: {},
-          to: {
-            transform: `translate(${props.position.left - meteorSize / 2}px, ${props.position.top - meteorSize / 2}px)`,
-          },
-        },
-      }}
+      sx={styleGenerator(props)}
     />
   )
 }
 
-const Wrapper = styled('div')({
-  position: 'absolute',
-  zIndex: 50,
-  backgroundColor: '#fff',
-})
+const Wrapper = styled('div')({})
+
 
 export default Meteor
