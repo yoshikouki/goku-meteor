@@ -23,7 +23,7 @@ const GokuMeteor = () => {
         key={meteorCount}
         position={{ top: pointerTop, left: pointerLeft }}
       />,
-    ])
+    ].slice(-10))
   }
 
   return (
