@@ -13,16 +13,18 @@ const Target = (props: MeteorProps) => {
   const targetX: number = props.position.left - meteorSize / 2
   const targetY: number = props.position.top - meteorSize / 2
 
-  const Wrapper = styled('div')({
+  const Container = styled('div')({
     position: 'absolute',
-    top: targetY,
-    left: targetX,
     zIndex: 100,
     width: meteorSize,
     height: meteorSize,
     borderRadius: meteorSize,
     backgroundColor: '#fff',
   })
+
+  const Wrapper = (): JSX.Element => (
+    <Container style={{ top: targetY, left: targetX }}/>
+  )
 
   return (
     <Wrapper/>
