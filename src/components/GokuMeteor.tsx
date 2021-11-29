@@ -1,8 +1,8 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 import { SetStateAction, useState } from 'react'
-import Meteor from './components/Meteor'
-import Target from './components/Target'
+import Meteor from './Meteor'
+import Target from './Target'
 
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
