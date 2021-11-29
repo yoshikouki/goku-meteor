@@ -20,7 +20,7 @@ const GokuMeteor = () => {
     setMeteors([
       ...meteors,
       <Meteor
-        key={meteors.length + 1}
+        key={meteorCount}
         position={{ top: pointerTop, left: pointerLeft }}
       />,
     ])
