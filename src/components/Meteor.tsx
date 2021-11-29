@@ -1,4 +1,5 @@
 import { styled } from '@mui/system'
+import { useEffect, useState } from 'react'
 
 interface MeteorProps {
   position: {
@@ -9,9 +10,17 @@ interface MeteorProps {
 }
 
 const Meteor = (props: MeteorProps) => {
+  const [ready, setReady] = useState(true)
   const meteorSize: number = props.width || 4
   const targetX: number = props.position.left - meteorSize / 2
   const targetY: number = props.position.top - meteorSize / 2
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setReady(false)
+    }, 1000)
+    return () => clearTimeout(timer)
+  }, [])
 
   const Wrapper = styled('div')({
     position: 'absolute',
@@ -20,17 +29,19 @@ const Meteor = (props: MeteorProps) => {
     height: meteorSize,
     borderRadius: meteorSize,
     backgroundColor: '#fff',
-    animation: 'strike 1s',
-    '@keyframes strike': {
-      from: {},
-      to: {
-        transform: `translate(${targetX}px, ${targetY}px)`,
-      },
-    },
+    transition: 'all 1s 0.1s',
+    '&.ready': {
+      transform: `translate(100px, 100px)`,
+    }
   })
 
   return (
-    <Wrapper/>
+    <Wrapper
+      className={ready ? 'ready' : ''}
+      style={{
+        transform: `translate(${targetX}px, ${targetY}px)`,
+      }}
+    />
   )
 }
 
