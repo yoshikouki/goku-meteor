@@ -13,9 +13,6 @@ const GokuMeteor = () => {
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setPointerTop(e.pageY)
     setPointerLeft(e.pageX)
-  }
-
-  const strikeHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setMeteorCount(meteorCount + 1)
     setMeteors([
       ...meteors,
@@ -29,7 +26,6 @@ const GokuMeteor = () => {
   return (
     <MeteorBackground
       onPointerMove={pointerMoveHandler}
-      onClick={strikeHandler}
     >
       <Target position={{ top: pointerTop, left: pointerLeft }}/>
       <Box>{meteors}</Box>
