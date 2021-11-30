@@ -14,6 +14,7 @@ const Target = (props: MeteorProps) => {
   const targetY: number = props.position.top - meteorSize / 2
 
   const Container = styled('div')({
+    'pointer-events': 'none',
     position: 'absolute',
     zIndex: 100,
     width: meteorSize,
