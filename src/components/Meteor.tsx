@@ -26,7 +26,7 @@ const Meteor = (props: MeteorProps) => {
     height: meteorSize,
     borderRadius: meteorSize,
     backgroundColor: '#fff',
-    transition: 'all 1s 0.1s',
+    transition: 'all 0.3s',
   })
 
   const transitionStyles: StyleType = {
