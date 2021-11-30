@@ -34,13 +34,13 @@ const GokuMeteor = () => {
     >
       <Target position={{ top: pointerTop, left: pointerLeft }}/>
       <Box>{meteors}</Box>
-      <Box><span style={{ color: 'white' }}>{meteorCount}</span></Box>
       <Meteor
         key={meteorCount}
         position={{ top: pointerTop, left: pointerLeft }}
         inProp={inProp}
         setInPropToFalse={setInPropToFalse}
       />
+      <MeteorCounter>{meteorCount}</MeteorCounter>
     </MeteorBackground>
   )
 }
@@ -50,6 +50,10 @@ const MeteorBackground = styled(Box)({
   height: '100vh',
   backgroundColor: 'darkblue',
   cursor: 'none',
+})
+
+const MeteorCounter = styled(Box)({
+  color: 'white'
 })
 
 export default GokuMeteor
