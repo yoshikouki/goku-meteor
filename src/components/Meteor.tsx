@@ -7,7 +7,9 @@ interface MeteorProps {
     left: number
   }
   width?: number
+  duration?: number
   inProp: boolean
+  setInPropToFalse: ()=>void
 }
 
 interface StyleType {
@@ -16,6 +18,7 @@ interface StyleType {
 
 const Meteor = (props: MeteorProps) => {
   const meteorSize: number = props.width || 4
+  const duration: number = props.duration || 300
   const targetX: number = props.position.left - meteorSize / 2
   const targetY: number = props.position.top - meteorSize / 2
 
@@ -26,7 +29,7 @@ const Meteor = (props: MeteorProps) => {
     height: meteorSize,
     borderRadius: meteorSize,
     backgroundColor: '#fff',
-    transition: 'all 0.3s',
+    transition: `all ${duration / 1000}s`,
   })
 
   const transitionStyles: StyleType = {
@@ -37,7 +40,12 @@ const Meteor = (props: MeteorProps) => {
   }
 
   return (
-    <Transition in={props.inProp} timeout={0} unmountOnExit>
+    <Transition
+      in={props.inProp}
+      timeout={0}
+      unmountOnExit
+      onEntered={()=> setTimeout(props.setInPropToFalse, duration)}
+    >
       {(state) => (
         <Wrapper
           style={{

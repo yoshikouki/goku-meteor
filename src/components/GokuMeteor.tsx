@@ -10,6 +10,7 @@ const GokuMeteor = () => {
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
   const [inProp, setInProp] = useState(false);
+  const setInPropToFalse = () => setInProp(false)
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
     setPointerTop(e.pageY)
@@ -21,6 +22,7 @@ const GokuMeteor = () => {
         key={meteorCount}
         position={{ top: pointerTop, left: pointerLeft }}
         inProp={inProp}
+        setInPropToFalse={setInPropToFalse}
       />,
     ].slice(-10))
   }
@@ -28,7 +30,7 @@ const GokuMeteor = () => {
   return (
     <MeteorBackground
       onPointerMove={pointerMoveHandler}
-      onClick={() => setInProp((prev) => !prev)}
+      onClick={() => setInProp(!inProp)}
     >
       <Target position={{ top: pointerTop, left: pointerLeft }}/>
       <Box>{meteors}</Box>
@@ -37,6 +39,7 @@ const GokuMeteor = () => {
         key={meteorCount}
         position={{ top: pointerTop, left: pointerLeft }}
         inProp={inProp}
+        setInPropToFalse={setInPropToFalse}
       />
     </MeteorBackground>
   )
