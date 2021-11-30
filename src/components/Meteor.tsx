@@ -17,17 +17,21 @@ interface StyleType {
 }
 
 const getRandomLaunchPoint = () => {
-  const maxX = window.innerWidth
-  const maxY = window.innerHeight
-  const X = Math.floor(maxX * Math.random())
-  const Y = Math.floor(maxY * Math.random())
-  const peers = [
-    { launchX: 0, launchY: Y },
-    { launchX: X, launchY: 0 },
-    { launchX: maxX, launchY: Y },
-    { launchX: X, launchY: maxY },
-  ]
-  return peers[Math.floor(Math.random() * peers.length)]
+  if (typeof window !== 'undefined') {
+    const maxX = window.innerWidth
+    const maxY = window.innerHeight
+    const X = Math.floor(maxX * Math.random())
+    const Y = Math.floor(maxY * Math.random())
+    const peers = [
+      { launchX: 0, launchY: Y },
+      { launchX: X, launchY: 0 },
+      { launchX: maxX, launchY: Y },
+      { launchX: X, launchY: maxY },
+    ]
+    return peers[Math.floor(Math.random() * peers.length)]
+  } else {
+    return { launchX: 0, launchY: 0 }
+  }
 }
 
 const Meteor = (props: MeteorProps) => {
