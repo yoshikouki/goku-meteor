@@ -1,5 +1,5 @@
 import { styled } from '@mui/system'
-import { useEffect, useState } from 'react'
+import { Transition } from 'react-transition-group'
 
 interface MeteorProps {
   position: {
@@ -7,20 +7,17 @@ interface MeteorProps {
     left: number
   }
   width?: number
+  inProp: boolean
+}
+
+interface StyleType {
+  [key: string]: any
 }
 
 const Meteor = (props: MeteorProps) => {
-  const [ready, setReady] = useState(true)
   const meteorSize: number = props.width || 4
   const targetX: number = props.position.left - meteorSize / 2
   const targetY: number = props.position.top - meteorSize / 2
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setReady(false)
-    }, 1000)
-    return () => clearTimeout(timer)
-  }, [])
 
   const Wrapper = styled('div')({
     position: 'absolute',
@@ -30,18 +27,25 @@ const Meteor = (props: MeteorProps) => {
     borderRadius: meteorSize,
     backgroundColor: '#fff',
     transition: 'all 1s 0.1s',
-    '&.ready': {
-      transform: `translate(100px, 100px)`,
-    }
   })
 
+  const transitionStyles: StyleType = {
+    entering: { transform: `translate(0px, 0px)` },
+    entered: { transform: `translate(${targetX}px, ${targetY}px)` },
+    exiting: { opacity: 0 },
+    exited: { opacity: 0 },
+  }
+
   return (
-    <Wrapper
-      className={ready ? 'ready' : ''}
-      style={{
-        transform: `translate(${targetX}px, ${targetY}px)`,
-      }}
-    />
+    <Transition in={props.inProp} timeout={0} unmountOnExit>
+      {(state) => (
+        <Wrapper
+          style={{
+            ...transitionStyles[state],
+          }}
+        />
+      )}
+    </Transition>
   )
 }
 
