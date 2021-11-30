@@ -9,7 +9,7 @@ interface MeteorProps {
   width?: number
   duration?: number
   inProp: boolean
-  setInPropToFalse: ()=>void
+  setInPropToFalse: () => void
 }
 
 interface StyleType {
@@ -59,7 +59,7 @@ const Meteor = (props: MeteorProps) => {
       in={props.inProp}
       timeout={0}
       unmountOnExit
-      onEntered={()=> setTimeout(props.setInPropToFalse, duration)}
+      onEntered={() => setTimeout(props.setInPropToFalse, duration)}
     >
       {(state) => (
         <Wrapper
