@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
-import { SetStateAction, useEffect, useState } from 'react'
+import { SetStateAction, useState } from 'react'
 import Meteor from './Meteor'
 import Target from './Target'
 
@@ -9,7 +9,7 @@ const GokuMeteor = () => {
   const [pointerLeft, setPointerLeft] = useState(0)
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
-  const [inProp, setInProp] = useState(false);
+  const [inProp, setInProp] = useState(false)
   const setInPropToFalse = () => setInProp(false)
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
@@ -53,7 +53,7 @@ const MeteorBackground = styled(Box)({
 })
 
 const MeteorCounter = styled(Box)({
-  color: 'white'
+  color: 'white',
 })
 
 export default GokuMeteor
