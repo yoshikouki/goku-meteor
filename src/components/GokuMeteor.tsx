@@ -3,8 +3,6 @@ import { styled } from '@mui/system'
 import { SetStateAction, useState } from 'react'
 import Meteor from './Meteor'
 import Target from './Target'
-import MeteorBackground from './MeteorBackground'
-import MeteorWrapper from './MeteorWrapper'
 
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
@@ -33,8 +31,10 @@ const GokuMeteor = () => {
   }
 
   return (
-    <MeteorWrapper>
-      <MeteorBackground/>
+    <MeteorBackground
+      onPointerMove={pointerMoveHandler}
+      onClick={() => setInProp(!inProp)}
+    >
       <Target position={{ top: pointerTop, left: pointerLeft }}/>
       <Box>{meteors}</Box>
       <Meteor
@@ -44,9 +44,16 @@ const GokuMeteor = () => {
         setInPropToFalse={setInPropToFalse}
       />
       <MeteorCounter>{meteorCount}</MeteorCounter>
-    </MeteorWrapper>
+    </MeteorBackground>
   )
 }
+
+const MeteorBackground = styled(Box)({
+  width: '100vw',
+  height: '100vh',
+  backgroundColor: 'darkblue',
+  cursor: 'none',
+})
 
 const MeteorCounter = styled(Box)({
   color: 'white',
