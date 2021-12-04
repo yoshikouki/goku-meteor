@@ -7,6 +7,7 @@ import Target from './Target'
 const GokuMeteor = () => {
   const [pointerTop, setPointerTop] = useState(0)
   const [pointerLeft, setPointerLeft] = useState(0)
+  const [pointerMoveCount, setPointerMoveCount] = useState(0)
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
   const [inProp, setInProp] = useState(false)
@@ -15,10 +16,8 @@ const GokuMeteor = () => {
     return { top: pointerTop, left: pointerLeft }
   }
 
-  const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
-    setPointerTop(e.pageY)
-    setPointerLeft(e.pageX)
-    setMeteorCount(meteorCount + 1)
+  const addMeteorHandler = () => {
+    setMeteorCount(pointerMoveCount + 1)
     setMeteors([
       ...meteors,
       <Meteor
@@ -28,6 +27,13 @@ const GokuMeteor = () => {
         setInPropToFalse={setInPropToFalse}
       />,
     ].slice(-10))
+  }
+
+  const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
+    setPointerTop(e.pageY)
+    setPointerLeft(e.pageX)
+    setPointerMoveCount(pointerMoveCount + 1)
+    if (pointerMoveCount % 10 === 0) addMeteorHandler()
   }
 
   return (
