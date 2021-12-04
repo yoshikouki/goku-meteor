@@ -12,9 +12,7 @@ const GokuMeteor = () => {
   const [meteorCount, setMeteorCount] = useState(0)
   const [inProp, setInProp] = useState(false)
   const setInPropToFalse = () => setInProp(false)
-  const userPosition = () => {
-    return { top: pointerTop, left: pointerLeft }
-  }
+  const userPosition = () => ({ top: pointerTop, left: pointerLeft })
 
   const addMeteorHandler = () => {
     setMeteorCount(pointerMoveCount + 1)
@@ -41,15 +39,15 @@ const GokuMeteor = () => {
       onPointerMove={pointerMoveHandler}
       onClick={() => setInProp(!inProp)}
     >
-      <Target position={{ top: pointerTop, left: pointerLeft }}/>
-      <Box>{meteors}</Box>
+      <MeteorCounter>{meteorCount}</MeteorCounter>
+      <Target position={userPosition()}/>
       <Meteor
         key={meteorCount}
         position={userPosition()}
         inProp={inProp}
         setInPropToFalse={setInPropToFalse}
       />
-      <MeteorCounter>{meteorCount}</MeteorCounter>
+      <Box>{meteors}</Box>
     </MeteorBackground>
   )
 }
