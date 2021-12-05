@@ -15,7 +15,7 @@ const GokuMeteor = () => {
   const userPosition = () => ({ top: pointerTop, left: pointerLeft })
 
   const addMeteorHandler = () => {
-    setMeteorCount(pointerMoveCount + 1)
+    setMeteorCount(meteorCount + 1)
     setMeteors([
       ...meteors,
       <Meteor
