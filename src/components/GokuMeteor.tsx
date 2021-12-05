@@ -35,9 +35,9 @@ const GokuMeteor = () => {
       onPointerMove={pointerMoveHandler}
       onClick={addMeteorHandler}
     >
-      <MeteorCounter>{meteorCount}</MeteorCounter>
       <Target position={userPosition()}/>
       <Box>{meteors}</Box>
+      <MeteorCounter>{meteorCount}</MeteorCounter>
     </MeteorBackground>
   )
 }
