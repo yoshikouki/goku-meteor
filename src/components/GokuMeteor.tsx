@@ -27,7 +27,7 @@ const GokuMeteor = () => {
     setPointerTop(e.pageY)
     setPointerLeft(e.pageX)
     setPointerMoveCount(pointerMoveCount + 1)
-    if (pointerMoveCount % 10 === 0) addMeteorHandler()
+    if (pointerMoveCount % 5 === 0) addMeteorHandler()
   }
 
   return (
