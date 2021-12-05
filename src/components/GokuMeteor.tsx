@@ -10,8 +10,6 @@ const GokuMeteor = () => {
   const [pointerMoveCount, setPointerMoveCount] = useState(0)
   const [meteors, setMeteors] = useState<JSX.Element[]>([])
   const [meteorCount, setMeteorCount] = useState(0)
-  const [inProp, setInProp] = useState(false)
-  const setInPropToFalse = () => setInProp(false)
   const userPosition = () => ({ top: pointerTop, left: pointerLeft })
 
   const addMeteorHandler = () => {
@@ -21,8 +19,6 @@ const GokuMeteor = () => {
       <Meteor
         key={meteorCount}
         position={userPosition()}
-        inProp={inProp}
-        setInPropToFalse={setInPropToFalse}
       />,
     ].slice(-10))
   }

@@ -1,5 +1,6 @@
 import { styled } from '@mui/system'
 import { Transition } from 'react-transition-group'
+import { useEffect, useState } from 'react'
 
 interface MeteorProps {
   position: {
@@ -8,8 +9,6 @@ interface MeteorProps {
   }
   width?: number
   duration?: number
-  inProp: boolean
-  setInPropToFalse: () => void
 }
 
 const Meteor = (props: MeteorProps) => {
@@ -17,6 +16,7 @@ const Meteor = (props: MeteorProps) => {
   const duration: number = props.duration || 300
   const targetX: number = props.position.left - meteorSize / 2
   const targetY: number = props.position.top - meteorSize / 2
+  const [inProp, setInProp] = useState(false)
 
   const Wrapper = styled('div')({
     position: 'absolute',
@@ -36,12 +36,17 @@ const Meteor = (props: MeteorProps) => {
     },
   }
 
+  useEffect(() => {
+    setInProp(true)
+    const timer = setTimeout(() => {setInProp(false)}, duration)
+    return clearTimeout(timer)
+  }, [])
+
   return (
     <Transition
-      in={props.inProp}
+      in={inProp}
       timeout={0}
       unmountOnExit
-      onEntered={() => setTimeout(props.setInPropToFalse, duration)}
     >
       {(state) => (
         <Wrapper
