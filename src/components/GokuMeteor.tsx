@@ -37,16 +37,10 @@ const GokuMeteor = () => {
   return (
     <MeteorBackground
       onPointerMove={pointerMoveHandler}
-      onClick={() => setInProp(!inProp)}
+      onClick={addMeteorHandler}
     >
       <MeteorCounter>{meteorCount}</MeteorCounter>
       <Target position={userPosition()}/>
-      <Meteor
-        key={meteorCount}
-        position={userPosition()}
-        inProp={inProp}
-        setInPropToFalse={setInPropToFalse}
-      />
       <Box>{meteors}</Box>
     </MeteorBackground>
   )
