@@ -64,7 +64,9 @@ interface StyleType {
 }
 
 const getRandomLaunchPoint = () => {
-  if (typeof window !== 'undefined') {
+  if (typeof window === 'undefined') {
+    return { launchX: 0, launchY: 0 }
+  } else {
     const maxX = window.innerWidth
     const maxY = window.innerHeight
     const X = Math.floor(maxX * Math.random())
@@ -75,9 +77,8 @@ const getRandomLaunchPoint = () => {
       { launchX: maxX, launchY: Y },
       { launchX: X, launchY: maxY },
     ]
-    return peers[Math.floor(Math.random() * peers.length)]
-  } else {
-    return { launchX: 0, launchY: 0 }
+    const randomIndex = Math.floor(Math.random() * peers.length)
+    return peers[randomIndex]
   }
 }
 
