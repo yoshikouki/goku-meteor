@@ -31,8 +31,14 @@ const Meteor = (props: MeteorProps) => {
   })
 
   const transitionStyles: StyleType = {
-    entering: { transform: `translate(${launchX}px, ${launchY}px)` },
-    entered: { transform: `translate(${targetX}px, ${targetY}px)` },
+    entering: {
+      transform: `translate(${launchX}px, ${launchY}px)`,
+      backgroundColor: 'red',
+    },
+    entered: {
+      transform: `translate(${targetX}px, ${targetY}px)`,
+      backgroundColor: 'yellow',
+    },
   }
 
   useEffect(() => {
