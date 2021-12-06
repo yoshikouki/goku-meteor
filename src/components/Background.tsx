@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { Box } from '@mui/material'
 
 // eslint-disable-next-line react/display-name
-const MeteorBackground = () => <Wrapper/>
+const Background = () => <Wrapper/>
 
 const Wrapper = styled(Box)({
   width: '100vw',
@@ -12,4 +12,4 @@ const Wrapper = styled(Box)({
   cursor: 'none',
 })
 
-export default MeteorBackground
+export default Background
