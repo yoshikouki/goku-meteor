@@ -20,7 +20,7 @@ const GokuMeteor = () => {
         key={meteorCount}
         position={userPosition()}
       />,
-    ].slice(-10))
+    ].slice(-30))
   }
 
   const pointerMoveHandler = (e: { pageY: SetStateAction<number>; pageX: SetStateAction<number> }) => {
