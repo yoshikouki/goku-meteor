@@ -12,10 +12,12 @@ interface MeteorProps {
 }
 
 const Meteor = (props: MeteorProps) => {
-  const meteorSize: number = props.width || 4
-  const duration: number = props.duration || 300
-  const targetX: number = props.position.left - meteorSize / 2
-  const targetY: number = props.position.top - meteorSize / 2
+  const meteorSize = props.width || 4
+  const duration = props.duration || 1000
+  const targetX = props.position.left - meteorSize / 2
+  const targetY = props.position.top - meteorSize / 2
+  const { launchX, launchY } = getRandomLaunchPoint()
+
   const [inProp, setInProp] = useState(false)
 
   const Wrapper = styled('div')({
@@ -25,20 +27,17 @@ const Meteor = (props: MeteorProps) => {
     height: meteorSize,
     borderRadius: meteorSize,
     backgroundColor: '#fff',
+    transition: `all ${duration / 1000}s ease-in`,
   })
 
-  const launchPoint = getRandomLaunchPoint()
   const transitionStyles: StyleType = {
-    entering: { transform: `translate(${launchPoint.launchX}px, ${launchPoint.launchY}px)` },
-    entered: {
-      transition: `all ${duration / 1000}s`,
-      transform: `translate(${targetX}px, ${targetY}px)`,
-    },
+    entering: { transform: `translate(${launchX}px, ${launchY}px)` },
+    entered: { transform: `translate(${targetX}px, ${targetY}px)` },
   }
 
   useEffect(() => {
     setInProp(true)
-    const timer = setTimeout(() => {setInProp(false)}, duration)
+    const timer = setTimeout(() => setInProp(false), duration)
     return clearTimeout(timer)
   }, [])
 
