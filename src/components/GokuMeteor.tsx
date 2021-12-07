@@ -31,25 +31,25 @@ const GokuMeteor = () => {
   }
 
   return (
-    <MeteorBackground
+    <Background
       onPointerMove={pointerMoveHandler}
       onClick={addMeteorHandler}
     >
       <Target position={userPosition()}/>
       <Box>{meteors}</Box>
-      <MeteorCounter>{meteorCount}</MeteorCounter>
-    </MeteorBackground>
+      <Counter>{meteorCount}</Counter>
+    </Background>
   )
 }
 
-const MeteorBackground = styled(Box)({
+const Background = styled(Box)({
   width: '100vw',
   height: '100vh',
   backgroundColor: 'darkblue',
   cursor: 'none',
 })
 
-const MeteorCounter = styled(Box)({
+const Counter = styled(Box)({
   color: 'white',
 })
 
