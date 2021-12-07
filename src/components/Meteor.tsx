@@ -29,25 +29,24 @@ const Meteor = (props: Props) => {
     transition: `all ${duration / 1000}s ease-in`,
   })
 
+  const keyframes = [
+    {
+      transform: `translate(${launchX}px, ${launchY}px)`,
+      backgroundColor: 'red',
+    },
+    {
+      transform: `translate(${targetX}px, ${targetY}px)`,
+      backgroundColor: 'yellow',
+    },
+  ]
+  const options = {
+    duration: duration,
+    easing: 'ease-in',
+  }
   useEffect(() => {
-    if (!meteorRef.current) return
-
-    meteorRef.current.animate(
-      [
-        {
-          transform: `translate(${launchX}px, ${launchY}px)`,
-          backgroundColor: 'red',
-        },
-        {
-          transform: `translate(${targetX}px, ${targetY}px)`,
-          backgroundColor: 'yellow',
-        },
-      ],
-      {
-        duration: duration,
-        easing: 'ease-in',
-      },
-    )
+    if (meteorRef.current) {
+      meteorRef.current.animate(keyframes, options)
+    }
   }, [])
 
   return (
