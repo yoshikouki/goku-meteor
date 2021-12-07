@@ -1,8 +1,7 @@
+import { useEffect, useRef } from 'react'
 import { styled } from '@mui/system'
-import { Transition } from 'react-transition-group'
-import { useEffect, useState } from 'react'
 
-interface MeteorProps {
+interface Props {
   position: {
     top: number
     left: number
@@ -11,14 +10,14 @@ interface MeteorProps {
   duration?: number
 }
 
-const Meteor = (props: MeteorProps) => {
+const Meteor = (props: Props) => {
+  const meteorRef = useRef<HTMLDivElement>(null)
+
   const meteorSize = props.width || 4
   const duration = props.duration || 1000
   const targetX = props.position.left - meteorSize / 2
   const targetY = props.position.top - meteorSize / 2
   const { launchX, launchY } = getRandomLaunchPoint()
-
-  const [inProp, setInProp] = useState(false)
 
   const Wrapper = styled('div')({
     position: 'absolute',
@@ -30,42 +29,30 @@ const Meteor = (props: MeteorProps) => {
     transition: `all ${duration / 1000}s ease-in`,
   })
 
-  const transitionStyles: StyleType = {
-    entering: {
-      transform: `translate(${launchX}px, ${launchY}px)`,
-      backgroundColor: 'red',
-    },
-    entered: {
-      transform: `translate(${targetX}px, ${targetY}px)`,
-      backgroundColor: 'yellow',
-    },
-  }
-
   useEffect(() => {
-    setInProp(true)
-    const timer = setTimeout(() => setInProp(false), duration)
-    return clearTimeout(timer)
+    if (!meteorRef.current) return
+
+    meteorRef.current.animate(
+      [
+        {
+          transform: `translate(${launchX}px, ${launchY}px)`,
+          backgroundColor: 'red',
+        },
+        {
+          transform: `translate(${targetX}px, ${targetY}px)`,
+          backgroundColor: 'yellow',
+        },
+      ],
+      {
+        duration: duration,
+
+      },
+    )
   }, [])
 
   return (
-    <Transition
-      in={inProp}
-      timeout={0}
-      unmountOnExit
-    >
-      {(state) => (
-        <Wrapper
-          style={{
-            ...transitionStyles[state],
-          }}
-        />
-      )}
-    </Transition>
+    <Wrapper ref={meteorRef}/>
   )
-}
-
-interface StyleType {
-  [key: string]: any
 }
 
 const getRandomLaunchPoint = () => {

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import { styled } from '@mui/system'
 import { SetStateAction, useState } from 'react'
-import MeteorWA from './MeteorWA'
+import Meteor from './Meteor'
 import Target from './Target'
 
 const GokuMeteor = () => {
@@ -16,7 +16,7 @@ const GokuMeteor = () => {
     setMeteorCount(meteorCount + 1)
     setMeteors([
       ...meteors,
-      <MeteorWA
+      <Meteor
         key={meteorCount}
         position={userPosition()}
       />,
