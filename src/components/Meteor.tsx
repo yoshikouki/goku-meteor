@@ -45,7 +45,7 @@ const Meteor = (props: Props) => {
       ],
       {
         duration: duration,
-
+        easing: 'ease-in',
       },
     )
   }, [])
